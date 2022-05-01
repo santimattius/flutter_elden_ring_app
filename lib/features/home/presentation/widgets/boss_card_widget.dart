@@ -1,22 +1,22 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_arch_template/features/home/domain/entities/picture.dart';
+import 'package:flutter_arch_template/features/home/domain/entities/bosse.dart';
 
 import 'loading_widget.dart';
 
-class PictureCard extends StatefulWidget {
-  final Picture picture;
+class BossCard extends StatefulWidget {
+  final Boss boss;
 
-  const PictureCard(
-    this.picture, {
+  const BossCard(
+    this.boss, {
     Key key,
   }) : super(key: key);
 
   @override
-  _PictureCardState createState() => _PictureCardState();
+  _BossCardState createState() => _BossCardState();
 }
 
-class _PictureCardState extends State<PictureCard> {
+class _BossCardState extends State<BossCard> {
   final controller = TextEditingController();
   String inputStr;
 
@@ -27,7 +27,7 @@ class _PictureCardState extends State<PictureCard> {
         child: Column(
           children: [
             CachedNetworkImage(
-              imageUrl: widget.picture.downloadUrl,
+              imageUrl: widget.boss.image,
               placeholder: (context, url) => LoadingWidget(),
               errorWidget: (context, url, error) => Icon(Icons.error),
             ),
@@ -35,7 +35,7 @@ class _PictureCardState extends State<PictureCard> {
               alignment: Alignment.centerLeft,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text('Author: ${widget.picture.author}'),
+                child: Text('Author: ${widget.boss.name}'),
               ),
             )
           ],

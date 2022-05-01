@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_arch_template/features/home/domain/entities/picture.dart';
+import 'package:flutter_arch_template/features/home/domain/entities/bosse.dart';
 import 'package:meta/meta.dart';
 
 @immutable
@@ -19,9 +19,9 @@ class Empty extends HomeState {}
 class Loading extends HomeState {}
 
 class Loaded extends HomeState {
-  final List<Picture> pictures;
+  final List<Boss> bosses;
 
-  Loaded({@required this.pictures}) : super([pictures]);
+  Loaded({@required this.bosses}) : super([bosses]);
 }
 
 class Error extends HomeState {

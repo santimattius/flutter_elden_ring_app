@@ -1,26 +1,24 @@
-import 'package:flutter_arch_template/features/home/data/models/picture_model.dart';
+import 'package:flutter_arch_template/features/home/data/models/boss_model.dart';
 import 'package:flutter_arch_template/shared/error/exceptions.dart';
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 
-abstract class PicturesRemoteDataSource {
-  /// Calls the https://pictures.getsandbox.com:443/pictures endpoint.
-  ///
+abstract class BossesRemoteDataSource {
   /// Throws a [ServerException] for all error codes.
-  Future<List<PictureModel>> getPictures();
+  Future<List<BossModel>> getBosses();
 }
 
-class PicturesRemoteDataSourceImpl implements PicturesRemoteDataSource {
+class BossesRemoteDataSourceImpl implements BossesRemoteDataSource {
   final http.Client client;
 
-  PicturesRemoteDataSourceImpl({@required this.client});
+  BossesRemoteDataSourceImpl({@required this.client});
 
   @override
-  Future<List<PictureModel>> getPictures() async {
-    return _getPicturesUrl('https://pictures.getsandbox.com:443/pictures');
+  Future<List<BossModel>> getBosses() async {
+    return _getBossesUrl('https://eldenring.fanapis.com/api/bosses');
   }
 
-  Future<List<PictureModel>> _getPicturesUrl(String url) async {
+  Future<List<BossModel>> _getBossesUrl(String url) async {
     final response = await client
         .get(Uri.parse(url), headers: {'Content-Type': 'application/json'});
 

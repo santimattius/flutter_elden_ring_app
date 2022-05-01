@@ -1,5 +1,5 @@
 import 'package:flutter_arch_template/features/home/data/datasources/remote_data_source.dart';
-import 'package:flutter_arch_template/features/home/data/models/picture_model.dart';
+import 'package:flutter_arch_template/features/home/data/models/boss_model.dart';
 import 'package:flutter_arch_template/shared/error/exceptions.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
@@ -11,15 +11,15 @@ import '../../../fixtures/fixture_reader.dart';
 class MockHttpClient extends Mock implements http.Client {}
 
 void main() {
-  PicturesRemoteDataSourceImpl dataSource;
+  BossesRemoteDataSourceImpl dataSource;
   MockHttpClient mockHttpClient;
 
   setUp(() {
     mockHttpClient = MockHttpClient();
-    dataSource = PicturesRemoteDataSourceImpl(client: mockHttpClient);
+    dataSource = BossesRemoteDataSourceImpl(client: mockHttpClient);
   });
 
-  const _URL = 'https://pictures.getsandbox.com:443/pictures';
+  const _URL = 'https://bosses.getsandbox.com:443/bosses';
 
   void setUpMockHttpClientSuccess200() {
     when(mockHttpClient.get(any, headers: anyNamed('headers')))
@@ -31,26 +31,26 @@ void main() {
         .thenAnswer((_) async => http.Response('Something went wrong', 404));
   }
 
-  group('getPictures', () {
-    final tPictureModel = fromJson(fixture('data.json'));
+  group('getBosses', () {
+    final tBossModel = fromJson(fixture('data.json'));
 
     test('''should perform a GET request on a URL with number 
     being the endpoint and with application/json header''', () async {
       setUpMockHttpClientSuccess200();
-      dataSource.getPictures();
+      dataSource.getBosses();
 
       verify(mockHttpClient
           .get(Uri.parse(_URL), headers: {'Content-Type': 'application/json'}));
     });
 
     test(
-        'should return list of pictures when the response code is 200 (success)',
+        'should return list of bosses when the response code is 200 (success)',
         () async {
       setUpMockHttpClientSuccess200();
 
-      final result = await dataSource.getPictures();
+      final result = await dataSource.getBosses();
 
-      expect(result, equals(tPictureModel));
+      expect(result, equals(tBossModel));
     });
 
     test(
@@ -58,7 +58,7 @@ void main() {
         () async {
       setUpMockHttpClientFailure404();
 
-      final call = dataSource.getPictures;
+      final call = dataSource.getBosses;
 
       expect(() => call(), throwsA(TypeMatcher<ServerException>()));
     });

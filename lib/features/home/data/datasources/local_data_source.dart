@@ -1,28 +1,28 @@
-import 'package:flutter_arch_template/features/home/data/models/picture_model.dart';
+import 'package:flutter_arch_template/features/home/data/models/boss_model.dart';
 import 'package:flutter_arch_template/shared/error/exceptions.dart';
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-abstract class PicturesLocalDataSource {
-  /// Gets the cached [PictureModel] which was gotten the last time
+abstract class BossesLocalDataSource {
+  /// Gets the cached [BossModel] which was gotten the last time
   /// the user had an internet connection.
   ///
   /// Throws [NoLocalDataException] if no cached data is present.
-  Future<List<PictureModel>> getAll();
+  Future<List<BossModel>> getAll();
 
-  Future<void> cache(List<PictureModel> pictures);
+  Future<void> cache(List<BossModel> bosses);
 }
 
-const CACHED_PICTURES = 'cached_pictures';
+const CACHED_BOSSES = 'cached_bosses';
 
-class SharedPreferencesLocalDataSourceImpl implements PicturesLocalDataSource {
+class SharedPreferencesLocalDataSourceImpl implements BossesLocalDataSource {
   final SharedPreferences sharedPreferences;
 
   SharedPreferencesLocalDataSourceImpl({@required this.sharedPreferences});
 
   @override
-  Future<List<PictureModel>> getAll() {
-    final jsonString = sharedPreferences.getString(CACHED_PICTURES);
+  Future<List<BossModel>> getAll() {
+    final jsonString = sharedPreferences.getString(CACHED_BOSSES);
     if (jsonString == null) {
       throw CacheException();
     } else {
@@ -31,7 +31,7 @@ class SharedPreferencesLocalDataSourceImpl implements PicturesLocalDataSource {
   }
 
   @override
-  Future<void> cache(List<PictureModel> pictures) {
-    return sharedPreferences.setString(CACHED_PICTURES, toJson(pictures));
+  Future<void> cache(List<BossModel> bosses) {
+    return sharedPreferences.setString(CACHED_BOSSES, toJson(bosses));
   }
 }

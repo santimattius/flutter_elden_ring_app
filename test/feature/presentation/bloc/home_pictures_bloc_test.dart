@@ -1,26 +1,26 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter_arch_template/features/home/domain/usecases/get_pictures.dart';
-import 'package:flutter_arch_template/features/home/presentation/bloc/home_pictures_bloc.dart';
-import 'package:flutter_arch_template/features/home/presentation/bloc/home_pictures_event.dart';
-import 'package:flutter_arch_template/features/home/presentation/bloc/home_pictures_state.dart';
+import 'package:flutter_arch_template/features/home/domain/usecases/get_bosses.dart';
+import 'package:flutter_arch_template/features/home/presentation/bloc/home_bosses_bloc.dart';
+import 'package:flutter_arch_template/features/home/presentation/bloc/home_bosses_event.dart';
+import 'package:flutter_arch_template/features/home/presentation/bloc/home_bosses_state.dart';
 import 'package:flutter_arch_template/shared/error/failures.dart';
 import 'package:flutter_arch_template/shared/usecases/usecase.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../domain/picture_mother.dart';
+import '../../domain/boss_mother.dart';
 
-class MockGetPictures extends Mock implements GetPictures {}
+class MockGetBosses extends Mock implements GetBosses {}
 
 void main() {
-  HomePicturesBloc bloc;
-  MockGetPictures mockGetPictures;
+  HomeBossesBloc bloc;
+  MockGetBosses mockGetBosses;
 
   setUp(() {
-    mockGetPictures = MockGetPictures();
+    mockGetBosses = MockGetBosses();
 
-    bloc = HomePicturesBloc(
-      pictures: mockGetPictures,
+    bloc = HomeBossesBloc(
+      getBosses: mockGetBosses,
     );
   });
 
@@ -29,19 +29,19 @@ void main() {
     expect(bloc.state, equals(Init()));
   });
 
-  group('getPictures', () {
-    final tPictures = PictureMother.generate();
+  group('getBosses', () {
+    final tBosses = BossMother.generate();
 
     test(
-      'should get data from the get pictures use case',
+      'should get data from the get Bosses use case',
       () async {
         // arrange
-        when(mockGetPictures(any)).thenAnswer((_) async => Right(tPictures));
+        when(mockGetBosses(any)).thenAnswer((_) async => Right(tBosses));
         // act
-        bloc.add(GetPicturesEvent());
-        await untilCalled(mockGetPictures(any));
+        bloc.add(GetBossesEvent());
+        await untilCalled(mockGetBosses(any));
         // assert
-        verify(mockGetPictures(NoParams()));
+        verify(mockGetBosses(NoParams()));
       },
     );
 
@@ -49,14 +49,14 @@ void main() {
       'should emit [Loading, Loaded] when data is gotten successfully',
       () async {
         // arrange
-        when(mockGetPictures(any)).thenAnswer((_) async => Right(tPictures));
+        when(mockGetBosses(any)).thenAnswer((_) async => Right(tBosses));
         // assert later
         final expected = [
           Loading(),
-          Loaded(pictures: tPictures),
+          Loaded(bosses: tBosses),
         ];
         // act
-        bloc.add(GetPicturesEvent());
+        bloc.add(GetBossesEvent());
         // assert
         await expectLater(bloc.stream, emitsInOrder(expected));
       },
@@ -66,7 +66,7 @@ void main() {
       'should emit [Loading, Error] when getting data fails',
       () async {
         // arrange
-        when(mockGetPictures(any))
+        when(mockGetBosses(any))
             .thenAnswer((_) async => Left(ServerFailure()));
         // assert later
         final expected = [
@@ -74,7 +74,7 @@ void main() {
           Error(message: SERVER_FAILURE_MESSAGE),
         ];
         // act
-        bloc.add(GetPicturesEvent());
+        bloc.add(GetBossesEvent());
         //assert
         await expectLater(bloc.stream, emitsInOrder(expected));
       },
@@ -84,7 +84,7 @@ void main() {
       'should emit [Loading, Error] with a proper message for the error when getting data fails',
       () async {
         // arrange
-        when(mockGetPictures(any))
+        when(mockGetBosses(any))
             .thenAnswer((_) async => Left(CacheFailure()));
         // assert later
         final expected = [
@@ -92,7 +92,7 @@ void main() {
           Error(message: CACHE_FAILURE_MESSAGE),
         ];
         // act
-        bloc.add(GetPicturesEvent());
+        bloc.add(GetBossesEvent());
         // assert
         await expectLater(bloc.stream, emitsInOrder(expected));
       },

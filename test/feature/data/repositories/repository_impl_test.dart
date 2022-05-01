@@ -1,24 +1,24 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_arch_template/features/home/data/datasources/local_data_source.dart';
 import 'package:flutter_arch_template/features/home/data/datasources/remote_data_source.dart';
-import 'package:flutter_arch_template/features/home/data/repositories/pictures_repository_impl.dart';
-import 'package:flutter_arch_template/features/home/domain/entities/picture.dart';
+import 'package:flutter_arch_template/features/home/data/repositories/bosses_repository_impl.dart';
+import 'package:flutter_arch_template/features/home/domain/entities/bosse.dart';
 import 'package:flutter_arch_template/shared/error/exceptions.dart';
 import 'package:flutter_arch_template/shared/error/failures.dart';
 import 'package:flutter_arch_template/shared/network/network_info.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../picture_model_mother.dart';
+import '../boss_model_mother.dart';
 
-class MockRemoteDataSource extends Mock implements PicturesRemoteDataSource {}
+class MockRemoteDataSource extends Mock implements BossesRemoteDataSource {}
 
-class MockLocalDataSource extends Mock implements PicturesLocalDataSource {}
+class MockLocalDataSource extends Mock implements BossesLocalDataSource {}
 
 class MockNetworkInfo extends Mock implements NetworkInfo {}
 
 void main() {
-  PicturesRepositoryImpl repository;
+  BossesRepositoryImpl repository;
 
   MockRemoteDataSource mockRemoteDataSource;
   MockLocalDataSource mockLocalDataSource;
@@ -29,7 +29,7 @@ void main() {
     mockLocalDataSource = MockLocalDataSource();
     mockNetworkInfo = MockNetworkInfo();
 
-    repository = PicturesRepositoryImpl(
+    repository = BossesRepositoryImpl(
         remoteDataSource: mockRemoteDataSource,
         localDataSource: mockLocalDataSource,
         networkInfo: mockNetworkInfo);
@@ -53,14 +53,14 @@ void main() {
     });
   }
 
-  group('getPictures', () {
-    final tPicturesModels = PictureModelMother.generate();
-    final List<Picture> tPictures = tPicturesModels;
+  group('getBosses', () {
+    final tBossesModels = BossModelMother.generate();
+    final List<Boss> tBosses = tBossesModels;
 
     test('should che if device is online', () async {
       when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
 
-      repository.getPictures();
+      repository.getBosses();
 
       verify(mockNetworkInfo.isConnected);
     });
@@ -69,35 +69,35 @@ void main() {
       test(
           'should  return remote data when the call to remote data source is success',
           () async {
-        when(mockRemoteDataSource.getPictures())
-            .thenAnswer((_) async => tPicturesModels);
+        when(mockRemoteDataSource.getBosses())
+            .thenAnswer((_) async => tBossesModels);
 
-        final result = await repository.getPictures();
+        final result = await repository.getBosses();
 
-        verify(mockRemoteDataSource.getPictures());
-        expect(result, equals(Right(tPictures)));
+        verify(mockRemoteDataSource.getBosses());
+        expect(result, equals(Right(tBosses)));
       });
 
       test(
           'should  cache th data locally data when the call to remote data source is success',
           () async {
-        when(mockRemoteDataSource.getPictures())
-            .thenAnswer((_) async => tPicturesModels);
+        when(mockRemoteDataSource.getBosses())
+            .thenAnswer((_) async => tBossesModels);
 
-        await repository.getPictures();
+        await repository.getBosses();
 
-        verify(mockRemoteDataSource.getPictures());
-        verify(mockLocalDataSource.cache(tPicturesModels));
+        verify(mockRemoteDataSource.getBosses());
+        verify(mockLocalDataSource.cache(tBossesModels));
       });
 
       test(
           'should  return server failure when the call to remote data source is unsuccessful',
           () async {
-        when(mockRemoteDataSource.getPictures()).thenThrow(ServerException());
+        when(mockRemoteDataSource.getBosses()).thenThrow(ServerException());
 
-        final result = await repository.getPictures();
+        final result = await repository.getBosses();
 
-        verify(mockRemoteDataSource.getPictures());
+        verify(mockRemoteDataSource.getBosses());
 
         expect(result, equals(Left(ServerFailure())));
       });
@@ -108,20 +108,20 @@ void main() {
           'should return last locally cached data whe the cached data is present',
           () async {
         when(mockLocalDataSource.getAll())
-            .thenAnswer((_) async => tPicturesModels);
+            .thenAnswer((_) async => tBossesModels);
 
-        final result = await repository.getPictures();
+        final result = await repository.getBosses();
 
         verifyZeroInteractions(mockRemoteDataSource);
         verify(mockLocalDataSource.getAll());
-        expect(result, equals(Right(tPictures)));
+        expect(result, equals(Right(tBosses)));
       });
 
       test('should return CacheFailure when there isno cached data present',
           () async {
         when(mockLocalDataSource.getAll()).thenThrow(CacheException());
 
-        final result = await repository.getPictures();
+        final result = await repository.getBosses();
 
         verifyZeroInteractions(mockRemoteDataSource);
         verify(mockLocalDataSource.getAll());

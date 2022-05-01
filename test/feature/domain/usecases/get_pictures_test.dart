@@ -1,36 +1,36 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter_arch_template/features/home/domain/repositories/pictures_repository.dart';
-import 'package:flutter_arch_template/features/home/domain/usecases/get_pictures.dart';
+import 'package:flutter_arch_template/features/home/domain/repositories/bosses_repository.dart';
+import 'package:flutter_arch_template/features/home/domain/usecases/get_bosses.dart';
 import 'package:flutter_arch_template/shared/usecases/usecase.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../picture_mother.dart';
+import '../boss_mother.dart';
 
-class MockPicturesRepository extends Mock implements PicturesRepository {}
+class MockBossesRepository extends Mock implements BossesRepository {}
 
 void main() {
-  GetPictures usecase;
-  MockPicturesRepository mockPicturesRepository;
+  GetBosses usecase;
+  MockBossesRepository mockBossesRepository;
 
   setUp(() {
-    mockPicturesRepository = MockPicturesRepository();
-    usecase = GetPictures(mockPicturesRepository);
+    mockBossesRepository = MockBossesRepository();
+    usecase = GetBosses(mockBossesRepository);
   });
 
-  final tPictures = PictureMother.generate();
+  final tBosses = BossMother.generate();
 
   test(
-    'should get pictures from the repository',
+    'should get bosses from the repository',
     () async {
-      when(mockPicturesRepository.getPictures())
-          .thenAnswer((_) async => Right(tPictures));
+      when(mockBossesRepository.getBosses())
+          .thenAnswer((_) async => Right(tBosses));
 
       final result = await usecase(NoParams());
 
-      expect(result, Right(tPictures));
-      verify(mockPicturesRepository.getPictures());
-      verifyNoMoreInteractions(mockPicturesRepository);
+      expect(result, Right(tBosses));
+      verify(mockBossesRepository.getBosses());
+      verifyNoMoreInteractions(mockBossesRepository);
     },
   );
 }

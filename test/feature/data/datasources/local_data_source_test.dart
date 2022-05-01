@@ -1,5 +1,5 @@
 import 'package:flutter_arch_template/features/home/data/datasources/local_data_source.dart';
-import 'package:flutter_arch_template/features/home/data/models/picture_model.dart';
+import 'package:flutter_arch_template/features/home/data/models/boss_model.dart';
 import 'package:flutter_arch_template/shared/error/exceptions.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:matcher/matcher.dart';
@@ -7,7 +7,7 @@ import 'package:mockito/mockito.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../fixtures/fixture_reader.dart';
-import '../picture_model_mother.dart';
+import '../boss_model_mother.dart';
 
 class MockSharedPreferences extends Mock implements SharedPreferences {}
 
@@ -21,18 +21,18 @@ void main() {
         sharedPreferences: mockSharedPreferences);
   });
 
-  group('getAllPictures', () {
-    final pictures = fromJson(fixture('data.json'));
+  group('getAllBosses', () {
+    final bosses = fromJson(fixture('data.json'));
     test(
-        'should return list of pictures from SharedPreferences when there is one in the cache',
+        'should return list of bosses from SharedPreferences when there is one in the cache',
         () async {
       when(mockSharedPreferences.getString(any))
           .thenReturn(fixture('data.json'));
 
       final result = await dataSource.getAll();
 
-      verify(mockSharedPreferences.getString(CACHED_PICTURES));
-      expect(result, equals(pictures));
+      verify(mockSharedPreferences.getString(CACHED_BOSSES));
+      expect(result, equals(bosses));
     });
 
     test('should throw a CacheException when there is not a cached value',
@@ -46,14 +46,14 @@ void main() {
   });
 
   group('cache', () {
-    final tPictureModel = PictureModelMother.generate();
+    final tBossModel = BossModelMother.generate();
 
     test('should call SharedPreferences to cache the data', () async {
-      dataSource.cache(tPictureModel);
-      final expectedJsonString = toJson(tPictureModel);
+      dataSource.cache(tBossModel);
+      final expectedJsonString = toJson(tBossModel);
 
       verify(
-          mockSharedPreferences.setString(CACHED_PICTURES, expectedJsonString));
+          mockSharedPreferences.setString(CACHED_BOSSES, expectedJsonString));
     });
   });
 }

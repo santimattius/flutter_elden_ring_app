@@ -1,42 +1,42 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_arch_template/features/home/data/datasources/local_data_source.dart';
 import 'package:flutter_arch_template/features/home/data/datasources/remote_data_source.dart';
-import 'package:flutter_arch_template/features/home/domain/entities/picture.dart';
-import 'package:flutter_arch_template/features/home/domain/repositories/pictures_repository.dart';
+import 'package:flutter_arch_template/features/home/domain/entities/bosse.dart';
+import 'package:flutter_arch_template/features/home/domain/repositories/bosses_repository.dart';
 import 'package:flutter_arch_template/shared/error/exceptions.dart';
 import 'package:flutter_arch_template/shared/error/failures.dart';
 import 'package:flutter_arch_template/shared/network/network_info.dart';
 import 'package:meta/meta.dart';
 
-class PicturesRepositoryImpl implements PicturesRepository {
-  final PicturesRemoteDataSource remoteDataSource;
-  final PicturesLocalDataSource localDataSource;
+class BossesRepositoryImpl implements BossesRepository {
+  final BossesRemoteDataSource remoteDataSource;
+  final BossesLocalDataSource localDataSource;
   final NetworkInfo networkInfo;
 
-  PicturesRepositoryImpl(
+  BossesRepositoryImpl(
       {@required this.remoteDataSource,
       @required this.localDataSource,
       @required this.networkInfo});
 
   @override
-  Future<Either<Failure, List<Picture>>> getPictures() async {
-    return await _getPictures(() async => await remoteDataSource.getPictures());
+  Future<Either<Failure, List<Boss>>> getBosses() async {
+    return await _getBosses(() async => await remoteDataSource.getBosses());
   }
 
-  Future<Either<Failure, List<Picture>>> _getPictures(
-      Future<List<Picture>> Function() call) async {
+  Future<Either<Failure, List<Boss>>> _getBosses(
+      Future<List<Boss>> Function() call) async {
     if (await networkInfo.isConnected) {
       try {
-        var remotePictures = await call();
-        localDataSource.cache(remotePictures);
-        return Right(remotePictures);
+        var remoteBosses = await call();
+        localDataSource.cache(remoteBosses);
+        return Right(remoteBosses);
       } on ServerException {
         return Left(ServerFailure());
       }
     } else {
       try {
-        var localPictures = await localDataSource.getAll();
-        return Right(localPictures);
+        var localBosses = await localDataSource.getAll();
+        return Right(localBosses);
       } on CacheException {
         return Left(CacheFailure());
       }
