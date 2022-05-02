@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.santimattius.template.flutter_arch_template">
+          package="com.santimattius.template.flutter_elden_ring_app">
     <application
-            android:label="flutter_arch_template"
+            android:label="flutter_elden_ring_app"
             android:name="${applicationName}"
             android:icon="@mipmap/ic_launcher">
         <activity

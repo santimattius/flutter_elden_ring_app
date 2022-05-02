@@ -1,6 +1,6 @@
-import 'package:flutter_arch_template/features/home/data/datasources/local_data_source.dart';
-import 'package:flutter_arch_template/features/home/data/models/boss_model.dart';
-import 'package:flutter_arch_template/shared/error/exceptions.dart';
+import 'package:flutter_elden_ring_app/features/home/data/datasources/local_data_source.dart';
+import 'package:flutter_elden_ring_app/features/home/data/models/boss_model.dart';
+import 'package:flutter_elden_ring_app/shared/error/exceptions.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:matcher/matcher.dart';
 import 'package:mockito/mockito.dart';
@@ -22,7 +22,7 @@ void main() {
   });
 
   group('getAllBosses', () {
-    final bosses = fromJson(fixture('data.json'));
+    final bosses = bossesFromJson(fixture('data.json'));
     test(
         'should return list of bosses from SharedPreferences when there is one in the cache',
         () async {
@@ -50,7 +50,7 @@ void main() {
 
     test('should call SharedPreferences to cache the data', () async {
       dataSource.cache(tBossModel);
-      final expectedJsonString = toJson(tBossModel);
+      final expectedJsonString = bossesToJson(tBossModel);
 
       verify(
           mockSharedPreferences.setString(CACHED_BOSSES, expectedJsonString));

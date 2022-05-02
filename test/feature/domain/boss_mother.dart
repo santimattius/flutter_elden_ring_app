@@ -1,4 +1,4 @@
-import 'package:flutter_arch_template/features/home/domain/entities/bosse.dart';
+import 'package:flutter_elden_ring_app/features/home/domain/entities/bosse.dart';
 
 import '../data/boss_model_mother.dart';
 

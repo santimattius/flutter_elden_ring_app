@@ -1,5 +1,6 @@
-import 'package:flutter_arch_template/features/home/data/models/boss_model.dart';
-import 'package:flutter_arch_template/shared/error/exceptions.dart';
+import 'package:flutter_elden_ring_app/features/home/data/models/boss_model.dart';
+import 'package:flutter_elden_ring_app/features/home/data/models/boss_response_model.dart';
+import 'package:flutter_elden_ring_app/shared/error/exceptions.dart';
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 
@@ -23,7 +24,7 @@ class BossesRemoteDataSourceImpl implements BossesRemoteDataSource {
         .get(Uri.parse(url), headers: {'Content-Type': 'application/json'});
 
     if (response.statusCode == 200) {
-      return fromJson(response.body);
+      return bossesResponseFromJson(response.body).data;
     } else {
       throw ServerException();
     }

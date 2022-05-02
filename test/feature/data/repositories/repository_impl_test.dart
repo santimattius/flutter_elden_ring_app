@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter_arch_template/features/home/data/datasources/local_data_source.dart';
-import 'package:flutter_arch_template/features/home/data/datasources/remote_data_source.dart';
-import 'package:flutter_arch_template/features/home/data/repositories/bosses_repository_impl.dart';
-import 'package:flutter_arch_template/features/home/domain/entities/bosse.dart';
-import 'package:flutter_arch_template/shared/error/exceptions.dart';
-import 'package:flutter_arch_template/shared/error/failures.dart';
-import 'package:flutter_arch_template/shared/network/network_info.dart';
+import 'package:flutter_elden_ring_app/features/home/data/datasources/local_data_source.dart';
+import 'package:flutter_elden_ring_app/features/home/data/datasources/remote_data_source.dart';
+import 'package:flutter_elden_ring_app/features/home/data/repositories/bosses_repository_impl.dart';
+import 'package:flutter_elden_ring_app/features/home/domain/entities/bosse.dart';
+import 'package:flutter_elden_ring_app/shared/error/exceptions.dart';
+import 'package:flutter_elden_ring_app/shared/error/failures.dart';
+import 'package:flutter_elden_ring_app/shared/network/network_info.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 

@@ -1,4 +1,4 @@
-package com.santimattius.template.flutter_arch_template
+package com.santimattius.template.flutter_elden_ring_app
 
 import io.flutter.embedding.android.FlutterActivity
 

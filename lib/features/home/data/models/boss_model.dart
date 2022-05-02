@@ -1,12 +1,12 @@
 import 'dart:convert';
 
-import 'package:flutter_arch_template/features/home/domain/entities/bosse.dart';
+import 'package:flutter_elden_ring_app/features/home/domain/entities/bosse.dart';
 import 'package:meta/meta.dart';
 
-List<BossModel> fromJson(String str) =>
+List<BossModel> bossesFromJson(String str) =>
     List<BossModel>.from(json.decode(str).map((x) => BossModel.fromJson(x)));
 
-String toJson(List<BossModel> data) =>
+String bossesToJson(List<BossModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class BossModel extends Boss {

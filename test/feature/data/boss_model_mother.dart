@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:flutter_arch_template/features/home/data/models/boss_model.dart';
+import 'package:flutter_elden_ring_app/features/home/data/models/boss_model.dart';
 
 abstract class BossModelMother {
   static List<BossModel> generate() => List.generate(10, (index) => create());

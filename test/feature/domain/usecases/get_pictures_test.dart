@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter_arch_template/features/home/domain/repositories/bosses_repository.dart';
-import 'package:flutter_arch_template/features/home/domain/usecases/get_bosses.dart';
-import 'package:flutter_arch_template/shared/usecases/usecase.dart';
+import 'package:flutter_elden_ring_app/features/home/domain/repositories/bosses_repository.dart';
+import 'package:flutter_elden_ring_app/features/home/domain/usecases/get_bosses.dart';
+import 'package:flutter_elden_ring_app/shared/usecases/usecase.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 

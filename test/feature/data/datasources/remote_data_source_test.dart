@@ -1,6 +1,6 @@
-import 'package:flutter_arch_template/features/home/data/datasources/remote_data_source.dart';
-import 'package:flutter_arch_template/features/home/data/models/boss_model.dart';
-import 'package:flutter_arch_template/shared/error/exceptions.dart';
+import 'package:flutter_elden_ring_app/features/home/data/datasources/remote_data_source.dart';
+import 'package:flutter_elden_ring_app/features/home/data/models/boss_model.dart';
+import 'package:flutter_elden_ring_app/shared/error/exceptions.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:matcher/matcher.dart';
@@ -32,7 +32,7 @@ void main() {
   }
 
   group('getBosses', () {
-    final tBossModel = fromJson(fixture('data.json'));
+    final tBossModel = bossesFromJson(fixture('data.json'));
 
     test('''should perform a GET request on a URL with number 
     being the endpoint and with application/json header''', () async {

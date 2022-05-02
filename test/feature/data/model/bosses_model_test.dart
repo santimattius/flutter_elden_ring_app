@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:flutter_arch_template/features/home/data/models/boss_model.dart';
-import 'package:flutter_arch_template/features/home/domain/entities/bosse.dart';
+import 'package:flutter_elden_ring_app/features/home/data/models/boss_model.dart';
+import 'package:flutter_elden_ring_app/features/home/domain/entities/bosse.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../fixtures/fixture_reader.dart';

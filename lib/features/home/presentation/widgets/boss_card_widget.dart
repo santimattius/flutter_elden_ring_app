@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_arch_template/features/home/domain/entities/bosse.dart';
+import 'package:flutter_elden_ring_app/features/home/domain/entities/bosse.dart';
 
 import 'loading_widget.dart';
 
@@ -26,16 +26,19 @@ class _BossCardState extends State<BossCard> {
       child: Container(
         child: Column(
           children: [
-            CachedNetworkImage(
-              imageUrl: widget.boss.image,
-              placeholder: (context, url) => LoadingWidget(),
-              errorWidget: (context, url, error) => Icon(Icons.error),
+            AspectRatio(
+              aspectRatio: 16/9,
+              child: CachedNetworkImage(
+                imageUrl: widget.boss.image,
+                placeholder: (context, url) => LoadingWidget(),
+                errorWidget: (context, url, error) => Icon(Icons.error),
+              ),
             ),
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text('Author: ${widget.boss.name}'),
+                child: Text(widget.boss.name),
               ),
             )
           ],

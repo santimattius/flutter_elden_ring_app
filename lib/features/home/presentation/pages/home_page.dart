@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart' as IOS;
 import 'package:flutter/material.dart' as Android;
 import 'package:flutter/widgets.dart';
-import 'package:flutter_arch_template/features/home/presentation/bloc/home_bosses_bloc.dart';
-import 'package:flutter_arch_template/features/home/presentation/bloc/home_bosses_event.dart';
-import 'package:flutter_arch_template/features/home/presentation/bloc/home_bosses_state.dart';
-import 'package:flutter_arch_template/features/home/presentation/widgets/widgets.dart';
-import 'package:flutter_arch_template/injection_container.dart';
+import 'package:flutter_elden_ring_app/features/home/presentation/bloc/home_bosses_bloc.dart';
+import 'package:flutter_elden_ring_app/features/home/presentation/bloc/home_bosses_event.dart';
+import 'package:flutter_elden_ring_app/features/home/presentation/bloc/home_bosses_state.dart';
+import 'package:flutter_elden_ring_app/features/home/presentation/widgets/widgets.dart';
+import 'package:flutter_elden_ring_app/injection_container.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatelessWidget {

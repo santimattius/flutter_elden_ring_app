@@ -1,11 +1,11 @@
 import 'package:data_connection_checker/data_connection_checker.dart';
-import 'package:flutter_arch_template/features/home/data/datasources/local_data_source.dart';
-import 'package:flutter_arch_template/features/home/data/datasources/remote_data_source.dart';
-import 'package:flutter_arch_template/features/home/data/repositories/bosses_repository_impl.dart';
-import 'package:flutter_arch_template/features/home/domain/repositories/bosses_repository.dart';
-import 'package:flutter_arch_template/features/home/domain/usecases/get_bosses.dart';
-import 'package:flutter_arch_template/features/home/presentation/bloc/home_bosses_bloc.dart';
-import 'package:flutter_arch_template/shared/network/network_info.dart';
+import 'package:flutter_elden_ring_app/features/home/data/datasources/local_data_source.dart';
+import 'package:flutter_elden_ring_app/features/home/data/datasources/remote_data_source.dart';
+import 'package:flutter_elden_ring_app/features/home/data/repositories/bosses_repository_impl.dart';
+import 'package:flutter_elden_ring_app/features/home/domain/repositories/bosses_repository.dart';
+import 'package:flutter_elden_ring_app/features/home/domain/usecases/get_bosses.dart';
+import 'package:flutter_elden_ring_app/features/home/presentation/bloc/home_bosses_bloc.dart';
+import 'package:flutter_elden_ring_app/shared/network/network_info.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';

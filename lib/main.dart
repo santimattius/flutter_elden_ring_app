@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart' as IOS;
 import 'package:flutter/material.dart' as Android;
 import 'package:flutter/widgets.dart';
-import 'package:flutter_arch_template/features/home/presentation/pages/home_page.dart';
+import 'package:flutter_elden_ring_app/features/home/presentation/pages/home_page.dart';
 
 import 'injection_container.dart' as di;
 

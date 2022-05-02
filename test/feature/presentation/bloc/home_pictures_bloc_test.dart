@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter_arch_template/features/home/domain/usecases/get_bosses.dart';
-import 'package:flutter_arch_template/features/home/presentation/bloc/home_bosses_bloc.dart';
-import 'package:flutter_arch_template/features/home/presentation/bloc/home_bosses_event.dart';
-import 'package:flutter_arch_template/features/home/presentation/bloc/home_bosses_state.dart';
-import 'package:flutter_arch_template/shared/error/failures.dart';
-import 'package:flutter_arch_template/shared/usecases/usecase.dart';
+import 'package:flutter_elden_ring_app/features/home/domain/usecases/get_bosses.dart';
+import 'package:flutter_elden_ring_app/features/home/presentation/bloc/home_bosses_bloc.dart';
+import 'package:flutter_elden_ring_app/features/home/presentation/bloc/home_bosses_event.dart';
+import 'package:flutter_elden_ring_app/features/home/presentation/bloc/home_bosses_state.dart';
+import 'package:flutter_elden_ring_app/shared/error/failures.dart';
+import 'package:flutter_elden_ring_app/shared/usecases/usecase.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
