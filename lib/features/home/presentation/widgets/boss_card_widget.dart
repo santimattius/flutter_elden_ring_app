@@ -23,26 +23,25 @@ class _BossCardState extends State<BossCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Container(
-        child: Column(
-          children: [
-            AspectRatio(
-              aspectRatio: 16/9,
-              child: CachedNetworkImage(
-                imageUrl: widget.boss.image,
-                placeholder: (context, url) => LoadingWidget(),
-                errorWidget: (context, url, error) => Icon(Icons.error),
-              ),
+      child: Column(
+        children: [
+          AspectRatio(
+            aspectRatio: 16 / 9,
+            child: CachedNetworkImage(
+              imageUrl: widget.boss.image,
+              fit: BoxFit.cover,
+              placeholder: (context, url) => LoadingWidget(),
+              errorWidget: (context, url, error) => Icon(Icons.error),
             ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(widget.boss.name),
-              ),
-            )
-          ],
-        ),
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(widget.boss.name),
+            ),
+          )
+        ],
       ),
     );
   }

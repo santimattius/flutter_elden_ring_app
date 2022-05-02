@@ -7,11 +7,12 @@ import 'package:flutter_elden_ring_app/features/home/presentation/pages/home_pag
 
 import 'injection_container.dart' as di;
 
-class MyHttpOverrides extends HttpOverrides{
+class MyHttpOverrides extends HttpOverrides {
   @override
-  HttpClient createHttpClient(SecurityContext context){
+  HttpClient createHttpClient(SecurityContext context) {
     return super.createHttpClient(context)
-      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }
 
@@ -22,7 +23,7 @@ void main() async {
   runApp(FlutterAppTemplate());
 }
 
-const _APP_NAME = 'Flutter App Template';
+const _APP_NAME = 'Elden Ring';
 
 class FlutterAppTemplate extends StatelessWidget {
   // This widget is the root of your application.
