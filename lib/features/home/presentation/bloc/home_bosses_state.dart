@@ -4,9 +4,9 @@ import 'package:meta/meta.dart';
 
 @immutable
 abstract class HomeState extends Equatable {
-  final List _props;
+  final List<Object> _props;
 
-  HomeState([this._props = const <dynamic>[]]) : super();
+  HomeState([this._props = const <Object>[]]) : super();
 
   @override
   List<Object> get props => _props;

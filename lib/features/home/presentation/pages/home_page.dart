@@ -1,8 +1,4 @@
-import 'dart:io';
-
-import 'package:flutter/cupertino.dart' as IOS;
-import 'package:flutter/material.dart' as Android;
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_elden_ring_app/features/home/presentation/bloc/home_bosses_bloc.dart';
 import 'package:flutter_elden_ring_app/features/home/presentation/bloc/home_bosses_event.dart';
@@ -11,26 +7,18 @@ import 'package:flutter_elden_ring_app/features/home/presentation/widgets/widget
 import 'package:flutter_elden_ring_app/injection_container.dart';
 
 class HomePage extends StatelessWidget {
-  static const _PAGE_TITLE = 'Elden Ring - Bosses';
+  static const _PAGE_TITLE = 'Elden Ring';
+  final _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
-    if (Platform.isIOS) {
-      return IOS.CupertinoPageScaffold(
-        // Uncomment to change the background color
-        navigationBar: const IOS.CupertinoNavigationBar(
-          middle: Text(_PAGE_TITLE),
-        ),
-        child: buildBody(context),
-      );
-    } else {
-      return Android.Scaffold(
-        appBar: Android.AppBar(
-          title: Text(_PAGE_TITLE),
-        ),
-        body: buildBody(context),
-      );
-    }
+    _scrollController.addListener(_onScroll(context));
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(_PAGE_TITLE),
+      ),
+      body: buildBody(context),
+    );
   }
 
   SafeArea buildBody(BuildContext context) {
@@ -61,7 +49,7 @@ class HomePage extends StatelessWidget {
       return ListView.builder(
           padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 8.0),
           shrinkWrap: true,
-          physics: scrollPhysics(),
+          physics: _scrollPhysics,
           itemCount: bosses.length,
           itemBuilder: (BuildContext context, int index) {
             return BossCard(bosses[index]);
@@ -75,9 +63,20 @@ class HomePage extends StatelessWidget {
     }
   }
 
-  IOS.ScrollPhysics scrollPhysics() {
-    return Platform.isIOS
-        ? IOS.BouncingScrollPhysics()
-        : Android.ClampingScrollPhysics();
+  ScrollPhysics get _scrollPhysics {
+    return ClampingScrollPhysics();
+  }
+
+  VoidCallback _onScroll(BuildContext context) {
+    if (_isBottom(context))
+      BlocProvider.of<HomeBossesBloc>(context).add(FetchBosses());
+  }
+
+  bool _isBottom(BuildContext context) {
+    if (!_scrollController.hasClients) return false;
+    final maxScroll = _scrollController.position.maxScrollExtent;
+    final double height = MediaQuery.of(context).size.height;
+    final currentScroll = _scrollController.offset;
+    return currentScroll >= (maxScroll * 0.9);
   }
 }

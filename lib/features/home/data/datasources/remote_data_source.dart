@@ -16,7 +16,7 @@ class BossesRemoteDataSourceImpl implements BossesRemoteDataSource {
 
   @override
   Future<List<BossModel>> getBosses() async {
-    return _getBossesUrl('https://eldenring.fanapis.com/api/bosses');
+    return _getBossesUrl('https://eldenring.fanapis.com/api/bosses?limit=100');
   }
 
   Future<List<BossModel>> _getBossesUrl(String url) async {

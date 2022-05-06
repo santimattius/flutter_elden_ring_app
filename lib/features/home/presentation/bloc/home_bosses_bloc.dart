@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_elden_ring_app/features/home/domain/entities/bosse.dart';
@@ -21,27 +23,22 @@ class HomeBossesBloc extends Bloc<HomeEvent, HomeState> {
     @required GetBosses getBosses,
   })  : assert(getBosses != null),
         this.getBosses = getBosses,
-        super(Init());
-
-  @override
-  Stream<HomeState> mapEventToState(
-    HomeEvent event,
-  ) async* {
-    // Immediately branching the logic with type checking, in order
-    // for the event to be smart casted
-    if (event is GetBossesEvent) {
-      yield Loading();
-      final failureOrBosses = await getBosses(
-        NoParams(),
-      );
-      yield* _eitherLoadedOrErrorState(failureOrBosses);
-    }
+        super(Init()) {
+    on<GetBossesEvent>(_onEvent);
   }
 
-  Stream<HomeState> _eitherLoadedOrErrorState(
+  FutureOr<void> _onEvent(GetBossesEvent event, Emitter<HomeState> emit) async {
+    emit(Loading());
+    final failureOrBosses = await getBosses(
+      NoParams(),
+    );
+    emit(_eitherAsState(failureOrBosses));
+  }
+
+  HomeState _eitherAsState(
     Either<Failure, List<Boss>> either,
-  ) async* {
-    yield either.fold(
+  ) {
+    return either.fold(
       (failure) => Error(message: _mapFailureToMessage(failure)),
       (bosses) => Loaded(bosses: bosses),
     );

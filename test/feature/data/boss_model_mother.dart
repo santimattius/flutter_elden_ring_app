@@ -12,9 +12,9 @@ abstract class BossModelMother {
       );
 
   static BossModel createSingle() => BossModel(
-        id: "0",
-        name: "Alejandro Escamilla",
-        image: "https://unsplash.com/photos/yC-Yzbqy7PY",
+        id: "17f69d6ca41l0i1umlxg0j36mhrnzr",
+        name: "Borealis The Freezing Fog",
+        image: "https://eldenring.fanapis.com/images/bosses/17f69d6ca41l0i1umlxg0j36mhrnzr.png",
       );
 }
 

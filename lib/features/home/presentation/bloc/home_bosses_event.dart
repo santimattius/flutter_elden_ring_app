@@ -12,3 +12,5 @@ abstract class HomeEvent extends Equatable {
 }
 
 class GetBossesEvent extends HomeEvent {}
+
+class FetchBosses extends HomeEvent {}

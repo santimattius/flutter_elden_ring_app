@@ -22,12 +22,12 @@ void main() {
   });
 
   group('getAllBosses', () {
-    final bosses = bossesFromJson(fixture('data.json'));
+    final bosses = bossesFromJson(fixture('bosses_data.json'));
     test(
         'should return list of bosses from SharedPreferences when there is one in the cache',
         () async {
       when(mockSharedPreferences.getString(any))
-          .thenReturn(fixture('data.json'));
+          .thenReturn(fixture('bosses_data.json'));
 
       final result = await dataSource.getAll();
 

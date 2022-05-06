@@ -19,7 +19,7 @@ void main() {
     dataSource = BossesRemoteDataSourceImpl(client: mockHttpClient);
   });
 
-  const _URL = 'https://bosses.getsandbox.com:443/bosses';
+  const _URL = 'https://eldenring.fanapis.com/api/bosses?limit=100';
 
   void setUpMockHttpClientSuccess200() {
     when(mockHttpClient.get(any, headers: anyNamed('headers')))
@@ -32,7 +32,7 @@ void main() {
   }
 
   group('getBosses', () {
-    final tBossModel = bossesFromJson(fixture('data.json'));
+    final tBossModel = bossesFromJson(fixture('bosses_data.json'));
 
     test('''should perform a GET request on a URL with number 
     being the endpoint and with application/json header''', () async {

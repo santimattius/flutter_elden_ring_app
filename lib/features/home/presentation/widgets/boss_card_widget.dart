@@ -31,7 +31,10 @@ class _BossCardState extends State<BossCard> {
               imageUrl: widget.boss.image,
               fit: BoxFit.cover,
               placeholder: (context, url) => LoadingWidget(),
-              errorWidget: (context, url, error) => Icon(Icons.error),
+              errorWidget: (context, url, error) => Image.asset(
+                'assets/camera.png',
+
+              ),
             ),
           ),
           Align(
