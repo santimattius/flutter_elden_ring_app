@@ -1,16 +1,19 @@
-import 'package:data_connection_checker/data_connection_checker.dart';
-import 'package:flutter_arch_template/shared/network/network_info.dart';
+import 'package:flutter_elden_ring_app/shared/network/network_info.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-class MockDataConnectionChecker extends Mock implements DataConnectionChecker {}
+import 'network_info_test.mocks.dart';
 
+
+@GenerateMocks([InternetConnectionChecker])
 void main() {
-  NetworkInfoImpl networkInfoImp;
-  MockDataConnectionChecker mockDataConnectionChecker;
+  late NetworkInfoImpl networkInfoImp;
+  late MockInternetConnectionChecker mockDataConnectionChecker;
 
   setUp(() {
-    mockDataConnectionChecker = MockDataConnectionChecker();
+    mockDataConnectionChecker = MockInternetConnectionChecker();
     networkInfoImp = NetworkInfoImpl(mockDataConnectionChecker);
   });
 
