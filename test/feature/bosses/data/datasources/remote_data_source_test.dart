@@ -32,7 +32,9 @@ void main() {
   }
 
   group('getBosses', () {
-    final tBossModel = bossesFromJson(fixture('bosses_data.json'));
+    final tBossModel = bossesFromJson(fixture('bosses_data.json'))
+        .where((element) => element.image.isNotEmpty)
+        .toList();
 
     test('''should perform a GET request on a URL with number 
     being the endpoint and with application/json header''', () async {
