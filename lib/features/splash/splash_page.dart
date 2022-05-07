@@ -17,6 +17,10 @@ class SplashScreenState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(child: Image.asset('assets/elden-ring.png',fit: BoxFit.cover,));
+    return Container(
+        child: Image.asset(
+      'assets/elden_ring.png',
+      fit: BoxFit.cover,
+    ));
   }
 }
