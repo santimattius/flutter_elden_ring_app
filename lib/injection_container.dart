@@ -10,40 +10,40 @@ import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-final sl = GetIt.instance;
+final serviceLocator = GetIt.instance;
 
 Future<void> init() async {
   //! Features
-  sl.registerFactory<HomeBossesBloc>(
-    () => HomeBossesBloc(getBosses: sl()),
+  serviceLocator.registerFactory<HomeBossesBloc>(
+    () => HomeBossesBloc(getBosses: serviceLocator()),
   );
   // Use cases
-  sl.registerLazySingleton(() => GetBosses(sl()));
+  serviceLocator.registerLazySingleton(() => GetBosses(serviceLocator()));
 
   // Repository
-  sl.registerLazySingleton<BossesRepository>(
+  serviceLocator.registerLazySingleton<BossesRepository>(
     () => BossesRepositoryImpl(
-      remoteDataSource: sl(),
-      localDataSource: sl(),
-      networkInfo: sl(),
+      remoteDataSource: serviceLocator(),
+      localDataSource: serviceLocator(),
+      networkInfo: serviceLocator(),
     ),
   );
 
   // Data sources
-  sl.registerLazySingleton<BossesRemoteDataSource>(
-    () => BossesRemoteDataSourceImpl(client: sl()),
+  serviceLocator.registerLazySingleton<BossesRemoteDataSource>(
+    () => BossesRemoteDataSourceImpl(client: serviceLocator()),
   );
 
-  sl.registerLazySingleton<BossesLocalDataSource>(
-    () => SharedPreferencesLocalDataSourceImpl(sharedPreferences: sl()),
+  serviceLocator.registerLazySingleton<BossesLocalDataSource>(
+    () => SharedPreferencesLocalDataSourceImpl(sharedPreferences: serviceLocator()),
   );
 
   //! Share
-  sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
+  serviceLocator.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(serviceLocator()));
 
   //! External
   final sharedPreferences = await SharedPreferences.getInstance();
-  sl.registerLazySingleton(() => sharedPreferences);
-  sl.registerLazySingleton(() => http.Client());
-  sl.registerLazySingleton(() => InternetConnectionChecker());
+  serviceLocator.registerLazySingleton(() => sharedPreferences);
+  serviceLocator.registerLazySingleton(() => http.Client());
+  serviceLocator.registerLazySingleton(() => InternetConnectionChecker());
 }

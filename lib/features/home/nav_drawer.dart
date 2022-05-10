@@ -1,41 +1,67 @@
 import 'package:flutter/material.dart';
 
 class NavDrawer extends StatelessWidget {
-  const NavDrawer({Key? key}) : super(key: key);
+  final List<String> items = [
+    'Header',
+    'Ammos',
+    'Armors',
+    'Ashes of War',
+    'Bosses',
+    'Classes',
+    'Creatures',
+    'Indications',
+    'Items',
+    'Locations',
+    'NPCs',
+    'Shields',
+    'Sorceries',
+    'Spirits',
+    'Talismans',
+    'Weapons',
+  ];
+
+  final String selected;
+
+  NavDrawer({Key? key, required this.selected}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      // Add a ListView to the drawer. This ensures the user can scroll
-      // through the options in the drawer if there isn't enough vertical
-      // space to fit everything.
-      child: ListView(
-        // Important: Remove any padding from the ListView.
+      child: ListView.separated(
+        physics: ClampingScrollPhysics(),
         padding: EdgeInsets.zero,
-        children: [
-          const DrawerHeader(
-            decoration: BoxDecoration(color: Colors.blueGrey),
-            child: Text('Drawer Header'),
-          ),
-          ListTile(
-            title: const Text('Item 1'),
-            onTap: () {
-              // Update the state of the app
-              // ...
-              // Then close the drawer
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            title: const Text('Item 2'),
-            onTap: () {
-              // Update the state of the app
-              // ...
-              // Then close the drawer
-              Navigator.pop(context);
-            },
-          ),
-        ],
+        itemCount: items.length,
+        itemBuilder: (context, index) {
+          if (index == 0) {
+            return UserAccountsDrawerHeader(
+              decoration: BoxDecoration(color: Colors.blueGrey),
+              currentAccountPictureSize: Size.square(82.0),
+              currentAccountPicture: Image.asset(
+                'assets/elden_ring_logo.png',
+                color: Colors.amber,
+              ),
+              accountName: Text('Elden Ring'),
+              accountEmail: Text('Wiki app'),
+            );
+          } else {
+            return ListTile(
+              trailing: Icon(Icons.arrow_forward_ios),
+              title: Text(items[index]),
+              onTap: () {
+                if (items[index] != selected) {
+                  final route = items[index].toLowerCase();
+                  Navigator.pushReplacementNamed(context, route);
+                } else {
+                  Navigator.pop(context);
+                }
+              },
+            );
+          }
+        },
+        separatorBuilder: (BuildContext context, int index) => Divider(
+          height: 1,
+          color: Colors.grey,
+        ),
       ),
     );
   }

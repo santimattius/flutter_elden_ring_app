@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_elden_ring_app/features/bosses/presentation/pages/bosses_page.dart';
+import 'package:flutter_elden_ring_app/features/classes/presentation/classes_page.dart';
 import 'package:flutter_elden_ring_app/features/splash/splash_page.dart';
 
+import 'features/detail/detail_page.dart';
 import 'injection_container.dart' as di;
 
 class CustomHttpOverrides extends HttpOverrides {
@@ -38,9 +40,11 @@ class FlutterAppTemplate extends StatelessWidget {
       title: _APP_NAME,
       routes: {
         "splash": (context) => SplashPage(),
-        "home": (context) => BossesPage(),
+        "bosses": (context) => BossesPage(),
+        'detail': (context) => DetailPage(),
+        'classes': (context) => ClassesPage()
       },
-      initialRoute: "home",
+      initialRoute: "bosses",
       theme: ThemeData(primarySwatch: Colors.blueGrey, useMaterial3: true),
     );
   }
