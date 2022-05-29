@@ -16,7 +16,7 @@ abstract class BossModelMother {
         name: "Borealis The Freezing Fog",
         image:
             "https://eldenring.fanapis.com/images/bosses/17f69d6ca41l0i1umlxg0j36mhrnzr.png",
-        description: '',
+        description: 'Frost Dragon guarding the frozen lake of Mountaintop of Giants, emits a permanent blizzard.',
       );
 }
 
