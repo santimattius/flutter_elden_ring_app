@@ -1,25 +1,15 @@
-# Flutter App Template
 [![codecov](https://codecov.io/gh/santimattius/flutter_elden_ring_app/branch/master/graph/badge.svg?token=4BXJWN2QVC)](https://codecov.io/gh/santimattius/flutter_elden_ring_app) [![travis](https://travis-ci.com/santimattius/flutter_elden_ring_app.svg?token=P7xvicFZMo2reEHHNuJS&branch=master)](https://travis-ci.com/santimattius/flutter_elden_ring_app)
+# Elden Ring App
 
-This project is a template of an app in flutter using clean architecture.
-
-The following describes the architecture of the app, the structure of the project and the dependencies used.
-
-<p align="center">
-  <img src="https://github.com/santimattius/flutter_elden_ring_app/blob/master/screenshoot/flutter_ios_android.png?raw=true" alt="Project packages"/>
-</p>
-
-# Application architecture
+Elden Ring App using Flutter
 
 <p align="center">
-  <img src="https://github.com/santimattius/flutter_elden_ring_app/blob/master/screenshoot/flutter_clean_arch.png?raw=true" alt="Project packages"/>
+  <img width="300" src="https://github.com/santimattius/flutter_elden_ring_app/blob/master/screenshoot/classes_screen.png?raw=true" alt="Project packages"/>
+  <img width="300" src="https://github.com/santimattius/flutter_elden_ring_app/blob/master/screenshoot/boss_screen.png?raw=true" alt="Project packages"/>
+  <img width="300" src="https://github.com/santimattius/flutter_elden_ring_app/blob/master/screenshoot/detail_screen.png?raw=true" alt="Project packages"/>
+  <img width="300" src="https://github.com/santimattius/flutter_elden_ring_app/blob/master/screenshoot/nav_draw.png?raw=true" alt="Project packages"/>
 </p>
 
-## Project structure
-
-<p align="left">
-  <img src="https://github.com/santimattius/flutter_elden_ring_app/blob/master/screenshoot/flutter_package_structure.png?raw=true" alt="Project packages"/>
-</p>
 
 ## Packages
 ```yaml
