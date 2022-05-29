@@ -4,46 +4,66 @@ import 'package:flutter_elden_ring_app/features/bosses/data/repositories/bosses_
 import 'package:flutter_elden_ring_app/features/bosses/domain/repositories/bosses_repository.dart';
 import 'package:flutter_elden_ring_app/features/bosses/domain/usecases/get_bosses.dart';
 import 'package:flutter_elden_ring_app/features/bosses/presentation/bloc/home_bosses_bloc.dart';
+import 'package:flutter_elden_ring_app/features/classes/data/character_repo_impl.dart';
+import 'package:flutter_elden_ring_app/features/classes/data/classes_remote_data_source.dart';
+import 'package:flutter_elden_ring_app/features/classes/domain/character_repository.dart';
+import 'package:flutter_elden_ring_app/features/classes/presentation/bloc/home_classes_bloc.dart';
+import 'package:flutter_elden_ring_app/shared/network/client.dart';
 import 'package:flutter_elden_ring_app/shared/network/network_info.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-final sl = GetIt.instance;
+final serviceLocator = GetIt.instance;
+
+const BASE_URL = "https://eldenring.fanapis.com/api";
 
 Future<void> init() async {
   //! Features
-  sl.registerFactory<HomeBossesBloc>(
-    () => HomeBossesBloc(getBosses: sl()),
+  serviceLocator.registerFactory<HomeBossesBloc>(
+    () => HomeBossesBloc(getBosses: serviceLocator()),
   );
+  serviceLocator.registerFactory<HomeClassesBloc>(
+    () => HomeClassesBloc(serviceLocator()),
+  );
+
   // Use cases
-  sl.registerLazySingleton(() => GetBosses(sl()));
+  serviceLocator.registerLazySingleton(() => GetBosses(serviceLocator()));
 
   // Repository
-  sl.registerLazySingleton<BossesRepository>(
+  serviceLocator.registerLazySingleton<BossesRepository>(
     () => BossesRepositoryImpl(
-      remoteDataSource: sl(),
-      localDataSource: sl(),
-      networkInfo: sl(),
+      remoteDataSource: serviceLocator(),
+      localDataSource: serviceLocator(),
+      networkInfo: serviceLocator(),
     ),
   );
+  serviceLocator.registerLazySingleton<CharacterRepository>(
+      () => CharacterRepositoryImpl(serviceLocator()));
 
   // Data sources
-  sl.registerLazySingleton<BossesRemoteDataSource>(
-    () => BossesRemoteDataSourceImpl(client: sl()),
+  serviceLocator.registerLazySingleton<BossesRemoteDataSource>(
+    () => BossesRemoteDataSourceImpl(client: serviceLocator()),
   );
 
-  sl.registerLazySingleton<BossesLocalDataSource>(
-    () => SharedPreferencesLocalDataSourceImpl(sharedPreferences: sl()),
+  serviceLocator.registerLazySingleton<BossesLocalDataSource>(
+    () => SharedPreferencesLocalDataSourceImpl(
+        sharedPreferences: serviceLocator()),
   );
+
+  serviceLocator.registerLazySingleton<ClassesRemoteDataSource>(
+      () => ClassesRemoteDataSourceImpl(serviceLocator()));
 
   //! Share
-  sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
+  serviceLocator.registerLazySingleton<NetworkInfo>(
+      () => NetworkInfoImpl(serviceLocator()));
+  serviceLocator.registerLazySingleton(
+      () => ApiClient(client: serviceLocator(), baseUrl: BASE_URL));
 
   //! External
   final sharedPreferences = await SharedPreferences.getInstance();
-  sl.registerLazySingleton(() => sharedPreferences);
-  sl.registerLazySingleton(() => http.Client());
-  sl.registerLazySingleton(() => InternetConnectionChecker());
+  serviceLocator.registerLazySingleton(() => sharedPreferences);
+  serviceLocator.registerLazySingleton(() => http.Client());
+  serviceLocator.registerLazySingleton(() => InternetConnectionChecker());
 }
