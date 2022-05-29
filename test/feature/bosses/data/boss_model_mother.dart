@@ -6,15 +6,17 @@ abstract class BossModelMother {
   static List<BossModel> generate() => List.generate(10, (index) => create());
 
   static BossModel create() => BossModel(
-        id: "${TestingHelper.randomNumber()}",
-        name: TestingHelper.getRandomString(20),
-        image: TestingHelper.getRandomString(20),
-      );
+      id: "${TestingHelper.randomNumber()}",
+      name: TestingHelper.getRandomString(20),
+      image: TestingHelper.getRandomString(20),
+      description: '');
 
   static BossModel createSingle() => BossModel(
         id: "17f69d6ca41l0i1umlxg0j36mhrnzr",
         name: "Borealis The Freezing Fog",
-        image: "https://eldenring.fanapis.com/images/bosses/17f69d6ca41l0i1umlxg0j36mhrnzr.png",
+        image:
+            "https://eldenring.fanapis.com/images/bosses/17f69d6ca41l0i1umlxg0j36mhrnzr.png",
+        description: '',
       );
 }
 

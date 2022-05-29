@@ -6,8 +6,8 @@ abstract class BossMother {
   static List<Boss> generate() => List.generate(10, (index) => create());
 
   static Boss create() => Boss(
-        id: "${TestingHelper.randomNumber()}",
-        name: TestingHelper.getRandomString(20),
-        image: TestingHelper.getRandomString(20),
-      );
+      id: "${TestingHelper.randomNumber()}",
+      name: TestingHelper.getRandomString(20),
+      image: TestingHelper.getRandomString(20),
+      description: '');
 }

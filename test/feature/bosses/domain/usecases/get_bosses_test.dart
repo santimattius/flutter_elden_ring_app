@@ -7,7 +7,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../boss_mother.dart';
-import 'get_pictures_test.mocks.dart';
+import 'get_bosses_test.mocks.dart';
 
 @GenerateMocks([BossesRepository])
 void main() {

@@ -21,19 +21,18 @@ void main() async {
   HttpOverrides.global = new CustomHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
-  runApp(FlutterAppTemplate());
+  runApp(EldenRingApp());
 }
 
 const _APP_NAME = 'Elden Ring';
 
-class FlutterAppTemplate extends StatelessWidget {
+class EldenRingApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return buildMaterialApp();
   }
 
-  // create android app
   MaterialApp buildMaterialApp() {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -45,7 +44,7 @@ class FlutterAppTemplate extends StatelessWidget {
         'classes': (context) => ClassesPage()
       },
       initialRoute: "bosses",
-      theme: ThemeData(primarySwatch: Colors.blueGrey, useMaterial3: true),
+      theme: ThemeData.dark(),
     );
   }
 }

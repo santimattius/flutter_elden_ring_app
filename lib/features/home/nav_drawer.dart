@@ -27,7 +27,7 @@ class NavDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView.separated(
+      child: ListView.builder(
         physics: ClampingScrollPhysics(),
         padding: EdgeInsets.zero,
         itemCount: items.length,
@@ -45,7 +45,6 @@ class NavDrawer extends StatelessWidget {
             );
           } else {
             return ListTile(
-              trailing: Icon(Icons.arrow_forward_ios),
               title: Text(items[index]),
               onTap: () {
                 if (items[index] != selected) {
@@ -58,10 +57,6 @@ class NavDrawer extends StatelessWidget {
             );
           }
         },
-        separatorBuilder: (BuildContext context, int index) => Divider(
-          height: 1,
-          color: Colors.grey,
-        ),
       ),
     );
   }

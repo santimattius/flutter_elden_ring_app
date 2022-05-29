@@ -6,7 +6,6 @@ import 'package:flutter_elden_ring_app/features/bosses/domain/entities/bosse.dar
 import 'package:flutter_elden_ring_app/features/bosses/domain/usecases/get_bosses.dart';
 import 'package:flutter_elden_ring_app/shared/error/failures.dart';
 import 'package:flutter_elden_ring_app/shared/usecases/usecase.dart';
-import 'package:meta/meta.dart';
 
 import 'home_bosses_event.dart';
 import 'home_bosses_state.dart';
@@ -21,8 +20,7 @@ class HomeBossesBloc extends Bloc<HomeEvent, HomeState> {
 
   HomeBossesBloc({
     required GetBosses getBosses,
-  })  : assert(getBosses != null),
-        this.getBosses = getBosses,
+  })  : this.getBosses = getBosses,
         super(Init()) {
     on<GetBossesEvent>(_onEvent);
   }
